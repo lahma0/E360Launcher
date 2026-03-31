@@ -99,20 +99,20 @@ try {
     $installedToStartMenu = $false
     switch ($locationChoice) {
         "1" { 
-            $destinations += Join-Path $env:ONEDRIVE "Desktop"
+            $destinations += [Environment]::GetFolderPath("Desktop")
         }
-        "2" { 
+        "2" {
             $destinations += Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs"
             $installedToStartMenu = $true
         }
-        "3" { 
-            $destinations += Join-Path $env:ONEDRIVE "Desktop"
+        "3" {
+            $destinations += [Environment]::GetFolderPath("Desktop")
             $destinations += Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs"
             $installedToStartMenu = $true
         }
         default {
             Write-Warning "Invalid choice. Defaulting to 'Both'."
-            $destinations += Join-Path $env:ONEDRIVE "Desktop"
+            $destinations += [Environment]::GetFolderPath("Desktop")
             $destinations += Join-Path $env:APPDATA "Microsoft\Windows\Start Menu\Programs"
             $installedToStartMenu = $true
         }
