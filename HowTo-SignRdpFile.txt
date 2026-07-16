@@ -1,0 +1,7 @@
+Your code signing certificate must be imported into your personal certificate store on the Windows box you are running the 'rdpsign.exe' app on. To check your personal certificate store, open 'certlm.msc' and go to 'Personal' > 'Certificates'. To get the code signing certificates thumbprint, double click on the certificate, click the 'Deatils' tab, and scroll to the very bottom and copy the 'Thumbprint' value.
+
+To run the rdpsign.exe command:
+rdpsign.exe /sha256 [CODE_SIGNING_CERT_THUMBPRINT] [FILE_PATH_OF_RDP]
+
+To run the rdpsign.exe command using the 'Karst RDP Signing Cert':
+rdpsign.exe /sha256 589D2CA115C2C5D5A0CB0A895EC6F473589C901D '.\E360 Manager zt.rdp'
