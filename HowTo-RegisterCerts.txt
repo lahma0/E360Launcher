@@ -1,0 +1,48 @@
+--------------------------------------
+Trusted Root Certification Authorities
+--------------------------------------
+- The 'KarstCustomZeroTrustRootCA' certificate must be registered in the 'Trusted Root Certification Authorities' cert store.
+- Since this cert is registered as the primary cert in Cloudflare, Cloudflare WARP/One automatically registers this certificate on users' machines.
+
+--------------------------------------
+Intermediate Certification Authorities
+--------------------------------------
+- The 'KarstRdpSigningCert' code signing certificate must be registered in the 'Intermediate Certification Authorities' cert store.
+- This certificate will have to be imported with the script or Intune as it will not be automatically registered by Cloudflare.
+
+------------------
+Trusted Publishers
+------------------
+- The 'KarstRdpSigningCert' code signing certificate must be registered in the 'Trusted Publishers' cert store.
+- This certificate will have to be imported with the script or Intune as it will not be automatically registered by Cloudflare.
+
+----------------------------------------
+RDP Publisher Whitelist via GPO/Registry
+----------------------------------------
+- The 'KarstRdpSigningCert' code signing certificate must also be whitelisted, either via a Group Policy object or via the registry.
+- This will have to be done with the script or Intune as it will not be done by Cloudflare.
+
+    Group Policy Method:
+
+        - Navigate to:
+
+            Computer Configuration > Administrative Templates > Windows Components > Remote Desktop Services > Remote Desktop Connection Client
+
+        - Double click 'Specify thumbprints of certificates representing trusted .rdp publishers'
+
+        - Set the policy to 'Enabled'
+
+        - Append the following text to the comma-separated list of trusted certificate thumbprints (prefix with a comma if entries already exist and don't end with a comma):
+
+            sha256:A4DC2BFC340A485D1D293ACD00771D7971C0C1CA3C6335201EA739BCEF424A40
+
+    Registry Method:
+
+        - Create/edit the REG_SZ registry key named 'TrustedCertThumbprints' in 'HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services' by appending the following text (prefix with a comma if entries already exist and don't end with a comma):
+
+            sha256:A4DC2BFC340A485D1D293ACD00771D7971C0C1CA3C6335201EA739BCEF424A40
+
+-----
+Notes
+-----
+- I set up scripts in Intune to automatically perform all of the above actions, so as long as a machine is registered on Intune, it should already be set up and ready to go.

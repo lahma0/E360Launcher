@@ -5,3 +5,5 @@ rdpsign.exe /sha256 [CODE_SIGNING_CERT_THUMBPRINT] [FILE_PATH_OF_RDP]
 
 To run the rdpsign.exe command using the 'Karst RDP Signing Cert':
 rdpsign.exe /sha256 589D2CA115C2C5D5A0CB0A895EC6F473589C901D '.\E360 Manager zt.rdp'
+
+Note: Despite the command having the parameter '/sha256', it expects a sha1 hash, which it uses to lookup the cert in the certificate store. The '/sha256' switch tells the command to use sha256 encryption in the signature blob inside the RDP file.
