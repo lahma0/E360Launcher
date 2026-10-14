@@ -49,7 +49,7 @@ try {
     $repairScript = Join-Path $baseDir "repairShortcuts.ps1"
     if (Test-Path $repairScript) {
         Write-Host "Running repairShortcuts.ps1..." -ForegroundColor Yellow
-        & $repairScript
+        & (Get-Process -Id $PID).Path -ExecutionPolicy Bypass -File $repairScript
     } else {
         Write-Warning "repairShortcuts.ps1 not found at: $repairScript"
     }
